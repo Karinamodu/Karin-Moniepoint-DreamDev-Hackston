@@ -106,6 +106,25 @@ for filename in os.listdir(data_dir):
 #     print(f"No valid transactions found for {target_year}. No data to compute.")
 #     exit()
 
+busiest_hours_per_month = {}
+busiest_days_per_month = {}
+
+for month, hourly_sales in monthly_hourly_sales_volume.items():
+    if not hourly_sales:  #
+        continue
+
+    average_transaction_volume_per_hour = {}
+    for hour in hourly_sales:
+        if monthly_hourly_transaction_count[month][hour] > 0:
+            average_transaction_volume_per_hour[hour] = (
+                hourly_sales[hour] / monthly_hourly_transaction_count[month][hour]
+            )
+
+    busiest_hour = max(average_transaction_volume_per_hour, key=average_transaction_volume_per_hour.get, default="N/A")
+    busiest_hours_per_month[month] = busiest_hour
+
+    busiest_day = max(monthly_sales_volume[month], key=monthly_sales_volume[month].get, default="N/A")
+    busiest_days_per_month[month] = busiest_day
 
 
 highest_sales_day = max(daily_sale_volume, key=daily_sale_volume.get, default="N/A")
