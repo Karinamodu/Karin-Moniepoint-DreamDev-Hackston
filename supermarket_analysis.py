@@ -110,7 +110,7 @@ busiest_hours_per_month = {}
 busiest_days_per_month = {}
 
 for month, hourly_sales in monthly_hourly_sales_volume.items():
-    if not hourly_sales:  #
+    if not hourly_sales:  
         continue
 
     average_transaction_volume_per_hour = {}
